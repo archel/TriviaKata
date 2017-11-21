@@ -2,11 +2,12 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Game {
     private final Console console;
 
-    private ArrayList players = new ArrayList();
+    private List<String> players = new ArrayList<>();
     private int[] tiles = new int[6];
     private int[] coins = new int[6];
     private boolean[] inPenaltyBox = new boolean[6];
@@ -92,13 +93,13 @@ public class Game {
     }
 
     private void askQuestion() {
-        if (currentCategory() == "Pop")
+        if (currentCategory().equals("Pop"))
             console.printLine(popQuestions.removeFirst());
-        if (currentCategory() == "Science")
+        if (currentCategory().equals("Science"))
             console.printLine(scienceQuestions.removeFirst());
-        if (currentCategory() == "Sports")
+        if (currentCategory().equals("Sports"))
             console.printLine(sportsQuestions.removeFirst());
-        if (currentCategory() == "Rock")
+        if (currentCategory().equals("Rock"))
             console.printLine(rockQuestions.removeFirst());
     }
 
