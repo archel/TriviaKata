@@ -16,17 +16,17 @@ public class GameRunner {
     }
 
     public static void runGame(Random rand) {
-        Game aGame = new Game();
-        aGame.add("Chet");
-        aGame.add("Pat");
-        aGame.add("Sue");
+        Game game = new Game();
+        game.add("Chet");
+        game.add("Pat");
+        game.add("Sue");
         do {
-            aGame.roll(rand.nextInt(5) + 1);
+            game.roll(rand.nextInt(5) + 1);
 
             if (rand.nextInt(9) == 7) {
-                notAWinner = aGame.wrongAnswer();
+                notAWinner = game.wrongAnswer();
             } else {
-                notAWinner = aGame.wasCorrectlyAnswered();
+                notAWinner = game.wasCorrectlyAnswered();
             }
         } while (notAWinner);
     }
