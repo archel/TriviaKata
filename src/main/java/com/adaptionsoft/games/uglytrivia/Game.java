@@ -121,38 +121,40 @@ public class Game {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
                 console.printLine("Answer was correct!!!!");
-                coins[currentPlayer]++;
+                addCoinsForCurrentPlayer();
                 console.printLine(players.get(currentPlayer)
                         + " now has "
                         + coins[currentPlayer]
                         + " Gold Coins.");
 
                 boolean winner = didPlayerWin();
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
-
+                passTurn();
                 return winner;
             } else {
-                currentPlayer++;
-                if (currentPlayer == players.size()) currentPlayer = 0;
+                passTurn();
                 return true;
             }
         } else {
             print();
-            coins[currentPlayer]++;
+            addCoinsForCurrentPlayer();
             console.printLine(players.get(currentPlayer)
                     + " now has "
                     + coins[currentPlayer]
                     + " Gold Coins.");
 
             boolean winner = didPlayerWin();
-            currentPlayer++;
-            if (currentPlayer == players.size()) {
-                currentPlayer = 0;
-            }
-
+            passTurn();
             return winner;
         }
+    }
+
+    private void addCoinsForCurrentPlayer() {
+        coins[currentPlayer]++;
+    }
+
+    private void passTurn() {
+        currentPlayer++;
+        if (currentPlayer == players.size()) currentPlayer = 0;
     }
 
     private void print() {
@@ -163,10 +165,7 @@ public class Game {
         console.printLine("Question was incorrectly answered");
         console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
-        currentPlayer++;
-        if (currentPlayer == players.size()) {
-            currentPlayer = 0;
-        }
+        passTurn();
         return true;
     }
 
