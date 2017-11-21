@@ -4,6 +4,7 @@ import com.adaptionsoft.games.trivia.runner.GameRunner;
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -17,16 +18,19 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnitParamsRunner.class)
 public class GameRunnerShould {
 
+    private ByteArrayOutputStream inMemorySystemOut;
+
+    @Before
+    public void setUp() {
+        inMemorySystemOut = redirectSystemOutputToInMemory();
+    }
+
     @Test
     @Parameters({"1", "2", "3", "4", "5"})
     public void output_the_game_result_when_it_finish(int seed) throws IOException {
-        ByteArrayOutputStream inMemorySystemOut = redirectSystemOutputToInMemory();
-        GameRunner runner = new GameRunner();
-        Random random = new Random(seed);
-        String gameResultFile = String.format("game-result-for-game-%d.txt", seed);
-        String expectedGameResult = IOUtils.toString(this.getClass().getResourceAsStream(gameResultFile), "UTF-8");
+        String expectedGameResult = loadGameResultFromFile(seed);
 
-        runner.runGame(random);
+        GameRunner.runGame(new Random(seed));
 
         assertEquals(expectedGameResult, inMemorySystemOut.toString());
     }
@@ -36,5 +40,10 @@ public class GameRunnerShould {
         PrintStream ps = new PrintStream(baos);
         System.setOut(ps);
         return baos;
+    }
+
+    private String loadGameResultFromFile(int seed) throws IOException {
+        String gameResultFile = String.format("game-result-for-game-%d.txt", seed);
+        return IOUtils.toString(this.getClass().getResourceAsStream(gameResultFile), "UTF-8");
     }
 }
