@@ -89,7 +89,6 @@ public class Game {
             console.printLine("The category is " + currentCategory());
             askQuestion();
         }
-
     }
 
     private void askQuestion() {
@@ -102,7 +101,6 @@ public class Game {
         if (currentCategory().equals("Rock"))
             console.printLine(rockQuestions.removeFirst());
     }
-
 
     private String currentCategory() {
         if (tiles[currentPlayer] == 0) return "Pop";
@@ -120,13 +118,9 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
-                console.printLine("Answer was correct!!!!");
+                printAnswerWasCorrect();
                 rewardPlayerWithCoin();
-                console.printLine(players.get(currentPlayer)
-                        + " now has "
-                        + coins[currentPlayer]
-                        + " Gold Coins.");
-
+                printCurrentPlayerCoins();
                 boolean winner = didPlayerWin();
                 passTurn();
                 return winner;
@@ -135,31 +129,34 @@ public class Game {
                 return true;
             }
         } else {
-            print();
+            printAnswerWasCorrent();
             rewardPlayerWithCoin();
             printCurrentPlayerCoins();
-
             boolean winner = didPlayerWin();
             passTurn();
             return winner;
         }
     }
 
-    private void printCurrentPlayerCoins() {
-        console.printLine(players.get(currentPlayer) + " now has " + coins[currentPlayer] + " Gold Coins.");
+    private void printAnswerWasCorrect() {
+        console.printLine("Answer was correct!!!!");
+    }
+
+    private void printAnswerWasCorrent() {
+        console.printLine("Answer was corrent!!!!");
     }
 
     private void rewardPlayerWithCoin() {
         coins[currentPlayer]++;
     }
 
+    private void printCurrentPlayerCoins() {
+        console.printLine(players.get(currentPlayer) + " now has " + coins[currentPlayer] + " Gold Coins.");
+    }
+
     private void passTurn() {
         currentPlayer++;
         if (currentPlayer == players.size()) currentPlayer = 0;
-    }
-
-    private void print() {
-        console.printLine("Answer was corrent!!!!");
     }
 
     public boolean wrongAnswer() {
