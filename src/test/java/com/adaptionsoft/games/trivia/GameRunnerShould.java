@@ -5,17 +5,19 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
 public class GameRunnerShould {
 
     @Test
-    public void whatever() {
+    public void output_the_game_result_when_it_finish() {
         ByteArrayOutputStream inMemorySystemOut = redirectSystemOutputToInMemory();
         GameRunner runner = new GameRunner();
-        String[] args = {""};
-        runner.main(args);
+        Random random = new Random(1);
+
+        runner.runGame(random);
 
         String expected = "Chet was added\n" +
                 "They are player number 1\n" +
