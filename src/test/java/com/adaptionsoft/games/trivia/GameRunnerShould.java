@@ -1,8 +1,11 @@
 package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.trivia.runner.GameRunner;
+import junitparams.JUnitParamsRunner;
+import junitparams.Parameters;
 import org.apache.commons.io.IOUtils;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -11,16 +14,17 @@ import java.util.Random;
 
 import static org.junit.Assert.assertEquals;
 
+@RunWith(JUnitParamsRunner.class)
 public class GameRunnerShould {
 
     @Test
-    public void output_the_game_result_when_it_finish() throws IOException {
+    @Parameters({"1", "2", "3", "4", "5"})
+    public void output_the_game_result_when_it_finish(int seed) throws IOException {
         ByteArrayOutputStream inMemorySystemOut = redirectSystemOutputToInMemory();
         GameRunner runner = new GameRunner();
-        Random random = new Random(1);
-        String expectedGameResult = IOUtils.toString(
-                this.getClass().getResourceAsStream("game-result-for-game-1.txt"), "UTF-8"
-        );
+        Random random = new Random(seed);
+        String gameResultFile = String.format("game-result-for-game-%d.txt", seed);
+        String expectedGameResult = IOUtils.toString(this.getClass().getResourceAsStream(gameResultFile), "UTF-8");
 
         runner.runGame(random);
 
