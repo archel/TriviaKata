@@ -16,6 +16,7 @@ public class Game {
 
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
+    private Console console  = new Console();
 
     public Game() {
         for (int i = 0; i < 50; i++) {
@@ -37,12 +38,12 @@ public class Game {
         inPenaltyBox[howManyPlayers()] = false;
 
         print(playerName);
-        Console.printLine("They are player number " + players.size());
+        console.printLine("They are player number " + players.size());
         return true;
     }
 
     private void print(String playerName) {
-        Console.printLine(playerName + " was added");
+        console.printLine(playerName + " was added");
     }
 
     public int howManyPlayers() {
@@ -50,26 +51,26 @@ public class Game {
     }
 
     public void roll(int roll) {
-        Console.printLine(players.get(currentPlayer) + " is the current player");
-        Console.printLine("They have rolled a " + roll);
+        console.printLine(players.get(currentPlayer) + " is the current player");
+        console.printLine("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true;
 
-                Console.printLine(players.get(currentPlayer) + " is getting out of the penalty box");
+                console.printLine(players.get(currentPlayer) + " is getting out of the penalty box");
                 tiles[currentPlayer] = tiles[currentPlayer] + roll;
                 if (tiles[currentPlayer] > 11) {
                     tiles[currentPlayer] = tiles[currentPlayer] - 12;
                 }
 
-                Console.printLine(players.get(currentPlayer)
+                console.printLine(players.get(currentPlayer)
                         + "'s new location is "
                         + tiles[currentPlayer]);
-                Console.printLine("The category is " + currentCategory());
+                console.printLine("The category is " + currentCategory());
                 askQuestion();
             } else {
-                Console.printLine(players.get(currentPlayer) + " is not getting out of the penalty box");
+                console.printLine(players.get(currentPlayer) + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
 
@@ -79,10 +80,10 @@ public class Game {
                 tiles[currentPlayer] = tiles[currentPlayer] - 12;
             }
 
-            Console.printLine(players.get(currentPlayer)
+            console.printLine(players.get(currentPlayer)
                     + "'s new location is "
                     + tiles[currentPlayer]);
-            Console.printLine("The category is " + currentCategory());
+            console.printLine("The category is " + currentCategory());
             askQuestion();
         }
 
@@ -116,9 +117,9 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
-                Console.printLine("Answer was correct!!!!");
+                console.printLine("Answer was correct!!!!");
                 coins[currentPlayer]++;
-                Console.printLine(players.get(currentPlayer)
+                console.printLine(players.get(currentPlayer)
                         + " now has "
                         + coins[currentPlayer]
                         + " Gold Coins.");
@@ -136,7 +137,7 @@ public class Game {
         } else {
             print();
             coins[currentPlayer]++;
-            Console.printLine(players.get(currentPlayer)
+            console.printLine(players.get(currentPlayer)
                     + " now has "
                     + coins[currentPlayer]
                     + " Gold Coins.");
@@ -152,12 +153,12 @@ public class Game {
     }
 
     private void print() {
-        Console.printLine("Answer was corrent!!!!");
+        console.printLine("Answer was corrent!!!!");
     }
 
     public boolean wrongAnswer() {
-        Console.printLine("Question was incorrectly answered");
-        Console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
+        console.printLine("Question was incorrectly answered");
+        console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
         currentPlayer++;
         if (currentPlayer == players.size()) {
