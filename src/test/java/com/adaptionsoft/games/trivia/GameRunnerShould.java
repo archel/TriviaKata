@@ -19,10 +19,12 @@ import static org.junit.Assert.assertEquals;
 public class GameRunnerShould {
 
     private ByteArrayOutputStream inMemorySystemOut;
+    private ConsoleTestable console;
 
     @Before
     public void setUp() {
         inMemorySystemOut = redirectSystemOutputToInMemory();
+        console = new ConsoleTestable();
     }
 
     @Test
@@ -30,9 +32,9 @@ public class GameRunnerShould {
     public void output_the_game_result_when_it_finish(int seed) throws IOException {
         String expectedGameResult = loadGameResultFromFile(seed);
 
-        GameRunner.runGame(new Random(seed));
+        GameRunner.runGame(new Random(seed), console);
 
-        assertEquals(expectedGameResult, inMemorySystemOut.toString());
+        assertEquals(expectedGameResult, console.toString());
     }
 
     private ByteArrayOutputStream redirectSystemOutputToInMemory() {

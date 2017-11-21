@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Game {
+    private final Console console;
+
     private ArrayList players = new ArrayList();
     private int[] tiles = new int[6];
     private int[] coins = new int[6];
@@ -16,9 +18,9 @@ public class Game {
 
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
-    private Console console  = new Console();
 
-    public Game() {
+    public Game(Console console) {
+        this.console = console;
         for (int i = 0; i < 50; i++) {
             popQuestions.addLast("Pop Question " + i);
             scienceQuestions.addLast(("Science Question " + i));
@@ -91,13 +93,13 @@ public class Game {
 
     private void askQuestion() {
         if (currentCategory() == "Pop")
-            System.out.println(popQuestions.removeFirst());
+            console.printLine(popQuestions.removeFirst().toString());
         if (currentCategory() == "Science")
-            System.out.println(scienceQuestions.removeFirst());
+            console.printLine(scienceQuestions.removeFirst().toString());
         if (currentCategory() == "Sports")
-            System.out.println(sportsQuestions.removeFirst());
+            console.printLine(sportsQuestions.removeFirst().toString());
         if (currentCategory() == "Rock")
-            System.out.println(rockQuestions.removeFirst());
+            console.printLine(rockQuestions.removeFirst().toString());
     }
 
 
