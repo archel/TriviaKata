@@ -11,10 +11,10 @@ public class Game {
     private int[] coins = new int[6];
     private boolean[] inPenaltyBox = new boolean[6];
 
-    private LinkedList popQuestions = new LinkedList();
-    private LinkedList scienceQuestions = new LinkedList();
-    private LinkedList sportsQuestions = new LinkedList();
-    private LinkedList rockQuestions = new LinkedList();
+    private LinkedList<String> popQuestions = new LinkedList<>();
+    private LinkedList<String> scienceQuestions = new LinkedList<>();
+    private LinkedList<String> sportsQuestions = new LinkedList<>();
+    private LinkedList<String> rockQuestions = new LinkedList<>();
 
     private int currentPlayer = 0;
     private boolean isGettingOutOfPenaltyBox;
@@ -93,13 +93,13 @@ public class Game {
 
     private void askQuestion() {
         if (currentCategory() == "Pop")
-            console.printLine(popQuestions.removeFirst().toString());
+            console.printLine(popQuestions.removeFirst());
         if (currentCategory() == "Science")
-            console.printLine(scienceQuestions.removeFirst().toString());
+            console.printLine(scienceQuestions.removeFirst());
         if (currentCategory() == "Sports")
-            console.printLine(sportsQuestions.removeFirst().toString());
+            console.printLine(sportsQuestions.removeFirst());
         if (currentCategory() == "Rock")
-            console.printLine(rockQuestions.removeFirst().toString());
+            console.printLine(rockQuestions.removeFirst());
     }
 
 
