@@ -37,12 +37,12 @@ public class Game {
         inPenaltyBox[howManyPlayers()] = false;
 
         print(playerName);
-        printLine("They are player number " + players.size());
+        Console.printLine("They are player number " + players.size());
         return true;
     }
 
     private void print(String playerName) {
-        printLine(playerName + " was added");
+        Console.printLine(playerName + " was added");
     }
 
     public int howManyPlayers() {
@@ -50,26 +50,26 @@ public class Game {
     }
 
     public void roll(int roll) {
-        printLine(players.get(currentPlayer) + " is the current player");
-        printLine("They have rolled a " + roll);
+        Console.printLine(players.get(currentPlayer) + " is the current player");
+        Console.printLine("They have rolled a " + roll);
 
         if (inPenaltyBox[currentPlayer]) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true;
 
-                printLine(players.get(currentPlayer) + " is getting out of the penalty box");
+                Console.printLine(players.get(currentPlayer) + " is getting out of the penalty box");
                 tiles[currentPlayer] = tiles[currentPlayer] + roll;
                 if (tiles[currentPlayer] > 11) {
                     tiles[currentPlayer] = tiles[currentPlayer] - 12;
                 }
 
-                printLine(players.get(currentPlayer)
+                Console.printLine(players.get(currentPlayer)
                         + "'s new location is "
                         + tiles[currentPlayer]);
-                printLine("The category is " + currentCategory());
+                Console.printLine("The category is " + currentCategory());
                 askQuestion();
             } else {
-                printLine(players.get(currentPlayer) + " is not getting out of the penalty box");
+                Console.printLine(players.get(currentPlayer) + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
 
@@ -79,10 +79,10 @@ public class Game {
                 tiles[currentPlayer] = tiles[currentPlayer] - 12;
             }
 
-            printLine(players.get(currentPlayer)
+            Console.printLine(players.get(currentPlayer)
                     + "'s new location is "
                     + tiles[currentPlayer]);
-            printLine("The category is " + currentCategory());
+            Console.printLine("The category is " + currentCategory());
             askQuestion();
         }
 
@@ -116,9 +116,9 @@ public class Game {
     public boolean wasCorrectlyAnswered() {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
-                printLine("Answer was correct!!!!");
+                Console.printLine("Answer was correct!!!!");
                 coins[currentPlayer]++;
-                printLine(players.get(currentPlayer)
+                Console.printLine(players.get(currentPlayer)
                         + " now has "
                         + coins[currentPlayer]
                         + " Gold Coins.");
@@ -136,7 +136,7 @@ public class Game {
         } else {
             print();
             coins[currentPlayer]++;
-            printLine(players.get(currentPlayer)
+            Console.printLine(players.get(currentPlayer)
                     + " now has "
                     + coins[currentPlayer]
                     + " Gold Coins.");
@@ -152,22 +152,18 @@ public class Game {
     }
 
     private void print() {
-        printLine("Answer was corrent!!!!");
+        Console.printLine("Answer was corrent!!!!");
     }
 
     public boolean wrongAnswer() {
-        printLine("Question was incorrectly answered");
-        printLine(players.get(currentPlayer) + " was sent to the penalty box");
+        Console.printLine("Question was incorrectly answered");
+        Console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
         inPenaltyBox[currentPlayer] = true;
         currentPlayer++;
         if (currentPlayer == players.size()) {
             currentPlayer = 0;
         }
         return true;
-    }
-
-    private void printLine(String message) {
-        System.out.println(message);
     }
 
     private boolean didPlayerWin() {
