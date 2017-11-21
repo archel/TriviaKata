@@ -121,7 +121,7 @@ public class Game {
         if (inPenaltyBox[currentPlayer]) {
             if (isGettingOutOfPenaltyBox) {
                 console.printLine("Answer was correct!!!!");
-                addCoinsForCurrentPlayer();
+                rewardPlayerWithCoin();
                 console.printLine(players.get(currentPlayer)
                         + " now has "
                         + coins[currentPlayer]
@@ -136,11 +136,8 @@ public class Game {
             }
         } else {
             print();
-            addCoinsForCurrentPlayer();
-            console.printLine(players.get(currentPlayer)
-                    + " now has "
-                    + coins[currentPlayer]
-                    + " Gold Coins.");
+            rewardPlayerWithCoin();
+            printCurrentPlayerCoins();
 
             boolean winner = didPlayerWin();
             passTurn();
@@ -148,7 +145,11 @@ public class Game {
         }
     }
 
-    private void addCoinsForCurrentPlayer() {
+    private void printCurrentPlayerCoins() {
+        console.printLine(players.get(currentPlayer) + " now has " + coins[currentPlayer] + " Gold Coins.");
+    }
+
+    private void rewardPlayerWithCoin() {
         coins[currentPlayer]++;
     }
 
