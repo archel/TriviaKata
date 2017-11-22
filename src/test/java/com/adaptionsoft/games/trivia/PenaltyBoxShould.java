@@ -31,7 +31,7 @@ public class PenaltyBoxShould {
     }
 
     @Test
-    public void remove_second_player_from_penalty_box() {
+    public void remove_player_from_penalty_box() {
         penaltyBox.add(PLAYER_ONE);
         penaltyBox.add(PLAYER_TWO);
 

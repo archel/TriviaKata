@@ -162,6 +162,7 @@ public class Game {
 
     public boolean wrongAnswer() {
         console.printLine("Question was incorrectly answered");
+        //Loop of rules, sum all turns and add the player X turns to the penalty box
         sendCurrentPlayerToPenaltyBox();
         passTurn();
         return true;
