@@ -29,7 +29,7 @@ public class PenaltyBoxShould {
 
         assertTrue(penaltyBox.isIn(PLAYER_ONE));
     }
-    
+
     @Test
     public void remove_second_player_from_penalty_box() {
         penaltyBox.add(PLAYER_ONE);
