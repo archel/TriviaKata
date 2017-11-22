@@ -11,6 +11,7 @@ public class Game {
     private int[] tiles = new int[6];
     private int[] coins = new int[6];
     private boolean[] inPenaltyBox = new boolean[6];
+    private PenaltyBox penaltyBox = new PenaltyBox();
 
     private LinkedList<String> popQuestions = new LinkedList<>();
     private LinkedList<String> scienceQuestions = new LinkedList<>();
@@ -38,7 +39,7 @@ public class Game {
         players.add(playerName);
         tiles[howManyPlayers()] = 0;
         coins[howManyPlayers()] = 0;
-        inPenaltyBox[howManyPlayers()] = false;
+        //inPenaltyBox[howManyPlayers()] = false;
 
         print(playerName);
         console.printLine("They are player number " + players.size());
