@@ -2,6 +2,7 @@ package com.adaptionsoft.games.trivia;
 
 import com.adaptionsoft.games.uglytrivia.Console;
 import com.adaptionsoft.games.uglytrivia.Game;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -9,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.inOrder;
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -17,11 +17,18 @@ public class GameShould {
 
     @Mock private Console console;
 
-    @Test public void
-    sends_player_to_penalty_box() {
-        Game game = new Game(console);
+    private static final int ODD_NUMBER = 1;
+    private Game game;
 
+    @Before
+    public void setUp() {
+        game = new Game(console);
+    }
+
+    @Test public void
+    sends_player_to_the_penalty_box() {
         game.add("PLAYER_NAME");
+
         game.wrongAnswer();
 
         InOrder inOrder = inOrder(console);
@@ -29,14 +36,15 @@ public class GameShould {
         inOrder.verify(console).printLine("They are player number 1");
         inOrder.verify(console).printLine("Question was incorrectly answered");
         inOrder.verify(console).printLine("PLAYER_NAME was sent to the penalty box");
+        verifyNoMoreInteractions(console);
     }
 
     @Test
-    public void get_out_player_of_the_penalty_box() {
-        Game game = new Game(console);
+    public void get_player_out_of_the_penalty_box() {
         game.add("PLAYER_NAME");
         game.wrongAnswer();
-        game.roll(1);
+        game.roll(ODD_NUMBER);
+
         game.wasCorrectlyAnswered();
 
         InOrder inOrder = inOrder(console);
