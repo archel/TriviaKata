@@ -58,37 +58,35 @@ public class Game {
         console.printLine("They have rolled a " + roll);
 
         if (isCurrentPlayerInPenaltyBox()) {
-            if (roll % 2 != 0) {
+            if (isOddNumber(roll)) {
                 isGettingOutOfPenaltyBox = true;
-
                 console.printLine(players.get(currentPlayer) + " is getting out of the penalty box");
                 tiles[currentPlayer] = tiles[currentPlayer] + roll;
                 if (tiles[currentPlayer] > 11) {
                     tiles[currentPlayer] = tiles[currentPlayer] - 12;
                 }
-
-                console.printLine(players.get(currentPlayer)
-                        + "'s new location is "
-                        + tiles[currentPlayer]);
+                console.printLine(players.get(currentPlayer) + "'s new location is " + tiles[currentPlayer]);
                 console.printLine("The category is " + currentCategory());
                 askQuestion();
             } else {
                 console.printLine(players.get(currentPlayer) + " is not getting out of the penalty box");
                 isGettingOutOfPenaltyBox = false;
             }
-
         } else {
             tiles[currentPlayer] = tiles[currentPlayer] + roll;
             if (tiles[currentPlayer] > 11) {
                 tiles[currentPlayer] = tiles[currentPlayer] - 12;
             }
-
             console.printLine(players.get(currentPlayer)
                     + "'s new location is "
                     + tiles[currentPlayer]);
             console.printLine("The category is " + currentCategory());
             askQuestion();
         }
+    }
+
+    private boolean isOddNumber(int roll) {
+        return roll % 2 != 0;
     }
 
     private void askQuestion() {
