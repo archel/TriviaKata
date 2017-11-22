@@ -161,10 +161,14 @@ public class Game {
 
     public boolean wrongAnswer() {
         console.printLine("Question was incorrectly answered");
-        console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
-        inPenaltyBox[currentPlayer] = true;
+        sendCurrentPlayerToPenaltyBox();
         passTurn();
         return true;
+    }
+
+    private void sendCurrentPlayerToPenaltyBox() {
+        console.printLine(players.get(currentPlayer) + " was sent to the penalty box");
+        inPenaltyBox[currentPlayer] = true;
     }
 
     private boolean didPlayerWin() {
