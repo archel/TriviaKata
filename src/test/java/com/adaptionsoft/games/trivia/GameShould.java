@@ -9,6 +9,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static org.mockito.Mockito.inOrder;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GameShould {
@@ -27,5 +29,29 @@ public class GameShould {
         inOrder.verify(console).printLine("They are player number 1");
         inOrder.verify(console).printLine("Question was incorrectly answered");
         inOrder.verify(console).printLine("PLAYER_NAME was sent to the penalty box");
+    }
+
+    @Test
+    public void get_out_player_of_the_penalty_box() {
+        Game game = new Game(console);
+        game.add("PLAYER_NAME");
+        game.wrongAnswer();
+        game.roll(1);
+        game.wasCorrectlyAnswered();
+
+        InOrder inOrder = inOrder(console);
+        inOrder.verify(console).printLine("PLAYER_NAME was added");
+        inOrder.verify(console).printLine("They are player number 1");
+        inOrder.verify(console).printLine("Question was incorrectly answered");
+        inOrder.verify(console).printLine("PLAYER_NAME was sent to the penalty box");
+        inOrder.verify(console).printLine("PLAYER_NAME is the current player");
+        inOrder.verify(console).printLine("They have rolled a 1");
+        inOrder.verify(console).printLine("PLAYER_NAME is getting out of the penalty box");
+        inOrder.verify(console).printLine("PLAYER_NAME's new location is 1");
+        inOrder.verify(console).printLine("The category is Science");
+        inOrder.verify(console).printLine("Science Question 0");
+        inOrder.verify(console).printLine("Answer was correct!!!!");
+        inOrder.verify(console).printLine("PLAYER_NAME now has 1 Gold Coins.");
+        verifyNoMoreInteractions(console);
     }
 }

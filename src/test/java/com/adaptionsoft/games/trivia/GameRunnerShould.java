@@ -18,12 +18,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(JUnitParamsRunner.class)
 public class GameRunnerShould {
 
-    private ByteArrayOutputStream inMemorySystemOut;
     private ConsoleTestable console;
 
     @Before
     public void setUp() {
-        inMemorySystemOut = redirectSystemOutputToInMemory();
         console = new ConsoleTestable();
     }
 
@@ -35,13 +33,6 @@ public class GameRunnerShould {
         GameRunner.runGame(new Random(seed), console);
 
         assertEquals(expectedGameResult, console.toString());
-    }
-
-    private ByteArrayOutputStream redirectSystemOutputToInMemory() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        System.setOut(ps);
-        return baos;
     }
 
     private String loadGameResultFromFile(int seed) throws IOException {
