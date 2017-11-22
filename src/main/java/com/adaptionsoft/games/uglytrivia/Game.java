@@ -57,7 +57,7 @@ public class Game {
         console.printLine(players.get(currentPlayer) + " is the current player");
         console.printLine("They have rolled a " + roll);
 
-        if (inPenaltyBox[currentPlayer]) {
+        if (isCurrentPlayerInPenaltyBox()) {
             if (roll % 2 != 0) {
                 isGettingOutOfPenaltyBox = true;
 
@@ -116,7 +116,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-        if (inPenaltyBox[currentPlayer]) {
+        if (isCurrentPlayerInPenaltyBox()) {
             if (isGettingOutOfPenaltyBox) {
                 printAnswerWasCorrect();
                 rewardPlayerWithCoin();
@@ -136,6 +136,10 @@ public class Game {
             passTurn();
             return winner;
         }
+    }
+
+    private boolean isCurrentPlayerInPenaltyBox() {
+        return inPenaltyBox[currentPlayer];
     }
 
     private void printAnswerWasCorrect() {
